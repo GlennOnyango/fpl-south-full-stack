@@ -1,6 +1,9 @@
+'use client'
 import LandingNavbar from "@/app/components/navbars/landing";
-
+import { loginUser } from "@/app/actions";
+import { useFormStatus } from "react-dom";
 export default function LoginToAccount() {
+  const { pending } = useFormStatus();
   return (
     <main className="flex flex-col align-center landing">
       <LandingNavbar />
@@ -10,18 +13,16 @@ export default function LoginToAccount() {
             Welcome back
           </h3>
 
-          <form className="w-full ">
+          <form className="w-full" action={loginUser.bind(null)}>
             <div className="flex flex-wrap mb-6">
               <div className="w-full px-3 mb-6 md:mb-0">
-                <label
-                  className="block tracking-wide text-black text-xs font-bold mb-2"
-                  for="grid-team-id"
-                >
+                <label className="block tracking-wide text-black text-xs font-bold mb-2">
                   Team Id
                 </label>
                 <input
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-black rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                   id="grid-team-id"
+                  name="teamId"
                   type="number"
                   placeholder="00000"
                 />
@@ -30,23 +31,25 @@ export default function LoginToAccount() {
 
             <div className="flex flex-wrap mb-3">
               <div className="w-full px-3">
-                <label
-                  className="block tracking-wide text-black text-xs font-bold mb-2"
-                  for="grid-password"
-                >
+                <label className="block tracking-wide text-black text-xs font-bold mb-2">
                   Password
                 </label>
                 <input
                   className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-password"
+                  name="password"
                   type="password"
                   placeholder="******************"
+                  required
                 />
               </div>
             </div>
 
             <div className="flex items-center justify-end px-3">
-              <a href="#" className="text-black text-md italic hover:text-blue">
+              <a
+                href="forgot-password"
+                className="text-black text-md italic hover:text-blue"
+              >
                 {" "}
                 Forgot Password?{" "}
               </a>
@@ -55,7 +58,8 @@ export default function LoginToAccount() {
             <div className="flex justify-center py-2">
               <button
                 type="submit"
-                className="bg-black block rounded-md py-2 px-4"
+                className="bg-black text-white block rounded-md py-2 px-4"
+                aria-disabled={pending}
               >
                 Sign In
               </button>
