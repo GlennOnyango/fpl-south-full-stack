@@ -1,9 +1,19 @@
 'use client'
 import LandingNavbar from "@/app/components/navbars/landing";
-import { loginUser } from "@/app/actions";
-import { useFormStatus } from "react-dom";
+import { loginUser,createUser } from "@/app/actions";
+import { useFormState, useFormStatus } from "react-dom";
+import { useEffect } from "react";
+
+const intialState = {
+  message:"",
+}
+
 export default function LoginToAccount() {
   const { pending } = useFormStatus();
+  const [state,formAction] = useFormState(loginUser,intialState);
+  useEffect(()=>{
+    console.log(state);
+  },[state]);
   return (
     <main className="flex flex-col align-center landing">
       <LandingNavbar />
@@ -13,7 +23,7 @@ export default function LoginToAccount() {
             Welcome back
           </h3>
 
-          <form className="w-full" action={loginUser.bind(null)}>
+          <form className="w-full" action={formAction}>
             <div className="flex flex-wrap mb-6">
               <div className="w-full px-3 mb-6 md:mb-0">
                 <label className="block tracking-wide text-black text-xs font-bold mb-2">
@@ -24,7 +34,8 @@ export default function LoginToAccount() {
                   id="grid-team-id"
                   name="teamId"
                   type="number"
-                  placeholder="00000"
+                  required
+                  placeholder="0"
                 />
               </div>
             </div>
@@ -65,6 +76,8 @@ export default function LoginToAccount() {
               </button>
             </div>
           </form>
+
+          <p>{state?.message}</p>
         </div>
       </div>
     </main>
