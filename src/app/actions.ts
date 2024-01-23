@@ -33,7 +33,7 @@ export async function loginUser(prevState: any, formData: FormData) {
   cookies().set("name", "Glenn");
   cookies().set("id", formData.get("teamId") as string);
 
-  redirect("dashboard");
+  redirect("dashboard?page=1");
 }
 
 export async function createUser(prevState: any, formData: FormData) {

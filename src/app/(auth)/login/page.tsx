@@ -11,9 +11,7 @@ const intialState = {
 export default function LoginToAccount() {
   const { pending } = useFormStatus();
   const [state,formAction] = useFormState(loginUser,intialState);
-  useEffect(()=>{
-    console.log(state);
-  },[state]);
+  
   return (
     <main className="flex flex-col align-center landing">
       <LandingNavbar />
