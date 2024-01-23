@@ -58,14 +58,14 @@ export default function LandingNavbarMain() {
                 FPL South
               </a>
               <div className="hidden sm:flex sm:ml-6 flex-row ">
-                <a href="#" className="rounded-md px-3 py-2 text-sm font-medium">
+                <a href="/dashboard?page=1" className="rounded-md px-3 py-2 text-sm font-medium">
                   Weekly Statistics
                 </a>
                 <a href="#" className="rounded-md px-3 py-2 text-sm font-medium">
                   Monthly Statistics
                 </a>
                 <a
-                  href="#"
+                  href="/dashboard/payment"
                   className="rounded-md px-3 py-2 text-sm font-medium"
                 >
                   Payment
