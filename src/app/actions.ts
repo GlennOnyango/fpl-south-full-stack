@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import { getCurrentEvent } from "./lib/weekly";
 
 // define the form data schema
 const schema = z.object({
@@ -33,7 +34,7 @@ export async function loginUser(prevState: any, formData: FormData) {
   cookies().set("name", "Glenn");
   cookies().set("id", formData.get("teamId") as string);
 
-  redirect("dashboard?page=1");
+  redirect(`dashboard?page=1`);
 }
 
 export async function createUser(prevState: any, formData: FormData) {

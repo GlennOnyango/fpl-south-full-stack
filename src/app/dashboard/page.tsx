@@ -1,11 +1,8 @@
-import {
-  fetchWeeklyData,
-  getBootStrap,
-  leagueData,
-  weeklyStandings,
-} from "../lib/weekly";
+import { getEvents, weeklyStandings } from "../lib/weekly";
 import LandingNavbarMain from "../components/navbars/main";
 import Link from "next/link";
+import EventSelect from "../components/eventSelect";
+import { get } from "http";
 
 type WeeklyData = {
   id: number;
@@ -24,8 +21,16 @@ export default async function Dashboard({
 }: {
   searchParams: { [page: string]: string };
 }) {
-  const {participants,leagueName,leagueId,weekNumber,gameWeek} = await weeklyStandings(Number(searchParams.page));
-  
+  const events: Array<{
+    id: number;
+    name: string;
+    finished: boolean;
+    is_current: boolean;
+    is_next: boolean;
+    is_previous: boolean;
+  }> = await getEvents();
+  const { participants, leagueName, leagueId, weekNumber, gameWeek } =
+    await weeklyStandings(Number(searchParams.page));
 
   const checkItemNumber = (item: WeeklyData) => {
     return item.index === 1 || item.index === 2;
@@ -38,11 +43,18 @@ export default async function Dashboard({
       </header>
       <main className="mx-auto max-w-7xl h-screen px-2 py-6 sm:px-6 lg:px-12">
         <div className="bg-[#37003C] rounded p-4">
-          <h2 className="text-4xl font-medium text-white">
-            Game week {weekNumber}
-          </h2>
+          <div className="flex justify-between pb-5">
+            <h2 className="text-4xl font-medium text-white">
+              Game week {weekNumber}
+            </h2>
+
+            <EventSelect events={events} currentEvent={weekNumber} />
+          </div>
+
           <div className="flex justify-between pt-5">
-            <p className="text-white">Number of participants : {participants}</p>
+            <p className="text-white">
+              Number of participants : {participants}
+            </p>
             <p className="text-white">League Id : {leagueId}</p>
             <p className="text-white">League Name : {leagueName}</p>
             <p className="text-white">Price Money : {participants * 50}</p>

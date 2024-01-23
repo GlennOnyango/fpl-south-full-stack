@@ -1,4 +1,6 @@
 const api_url = "https://fantasy.premierleague.com/api/";
+//leagueData by week
+//https://fantasy.premierleague.com/leagues/264658/standings/c?phase=6&page_new_entries=1&event=20
 
 export const getCostObject = async (eventId: number, userArray: number[]) => {
   return await Promise.all(
@@ -27,7 +29,7 @@ export const getCostObject = async (eventId: number, userArray: number[]) => {
   );
 };
 
-export const getBootStrap = async () => {
+export const getCurrentEvent = async () => {
   let eventCurrent = 0;
   const bootStrap = await fetch(`${api_url}bootstrap-static/`, {
     method: "GET",
@@ -44,6 +46,28 @@ export const getBootStrap = async () => {
   });
 
   return eventCurrent;
+};
+
+export const getEvents = async () => {
+  const bootStrap = await fetch(`${api_url}bootstrap-static/`, {
+    method: "GET",
+    redirect: "follow",
+  });
+
+  const bootStrapData = await bootStrap.text();
+  const bootStrapObject = JSON.parse(bootStrapData);
+  const events = bootStrapObject["events"];
+
+  return events.map((event: any) => {
+    return {
+      id: event["id"],
+      name: event["name"],
+      finished: event["finished"],
+      is_current: event["is_current"],
+      is_next: event["is_next"],
+      is_previous: event["is_previous"],
+    };
+  });
 };
 
 const rawWeeklyStandings = async () => {
@@ -82,7 +106,7 @@ export async function weeklyStandings(page: number) {
   //Get standings
   const collectedStandings = await rawWeeklyStandings();
   //Get current event
-  const eventCurrent = await getBootStrap();
+  const eventCurrent = await getCurrentEvent();
   // Get weekly cost
   const userList = collectedStandings.map((e: any) => e.entry);
   //League data
