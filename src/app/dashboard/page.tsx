@@ -47,8 +47,8 @@ export default async function Dashboard({
             <h2 className="text-4xl font-medium text-white">
               Game week {weekNumber}
             </h2>
-
-            <EventSelect events={events} currentEvent={weekNumber} />
+{/* 
+            <EventSelect events={events} currentEvent={weekNumber} /> */}
           </div>
 
           <div className="flex justify-between pt-5">

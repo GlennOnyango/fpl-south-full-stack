@@ -23,13 +23,13 @@ export default function EventSelect({ events, currentEvent }: Props) {
   const router = useRouter();
   const pathname = usePathname();
 
-    useEffect(() => {
-      if (selected) {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set("event", String(selected.id));
-        router.push(pathname + "?" + params.toString());
-      }
-    }, [selected]);
+    // useEffect(() => {
+    //   if (selected) {
+    //     const params = new URLSearchParams(searchParams.toString());
+    //     params.set("event", String(selected.id));
+    //     router.push(pathname + "?" + params.toString());
+    //   }
+    // }, [selected]);
 
   return (
     <Listbox value={selected} onChange={setSelected}>
