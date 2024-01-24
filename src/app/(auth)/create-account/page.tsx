@@ -13,10 +13,7 @@ export default function CreateAccount() {
           <form className="w-full ">
             <div className="flex flex-wrap mb-6">
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label
-                  className="block tracking-wide text-black text-xs font-bold mb-2"
-                  for="grid-team-id"
-                >
+                <label className="block tracking-wide text-black text-xs font-bold mb-2">
                   Team Id
                 </label>
                 <input
@@ -27,10 +24,7 @@ export default function CreateAccount() {
                 />
               </div>
               <div className="w-full md:w-1/2 px-3">
-                <label
-                  className="block tracking-wide text-black text-xs font-bold mb-2"
-                  for="grid-email"
-                >
+                <label className="block tracking-wide text-black text-xs font-bold mb-2">
                   Email
                 </label>
                 <input
@@ -47,10 +41,7 @@ export default function CreateAccount() {
 
             <div className="flex flex-wrap mb-6">
               <div className="w-full px-3">
-                <label
-                  className="block tracking-wide text-black text-xs font-bold mb-2"
-                  for="grid-password"
-                >
+                <label className="block tracking-wide text-black text-xs font-bold mb-2">
                   Password
                 </label>
                 <input
@@ -60,13 +51,16 @@ export default function CreateAccount() {
                   placeholder="******************"
                 />
                 <p className="text-black text-xs italic">
-                  Make it as long and as crazy as you'd like
+                  Make it as long and as crazy as you would like
                 </p>
               </div>
             </div>
 
             <div className="flex justify-center py-2">
-              <button type="submit" className="bg-black block rounded-md py-2 px-4">
+              <button
+                type="submit"
+                className="bg-black block rounded-md py-2 px-4"
+              >
                 Create Account
               </button>
             </div>
